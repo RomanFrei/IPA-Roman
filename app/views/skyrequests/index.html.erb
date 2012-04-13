@@ -1,0 +1,40 @@
+<div class="column half fl">
+	<div class="box box-table">
+		<h2 class="box-header">
+			Skylogic Requests
+		</h2>
+
+	<div class="box-content">
+		<%= form_tag(skyrequests_path(), :method => :post) do %>
+			<%= label_tag("Serial Number") %>
+			<%= text_field_tag(:value) %>
+			<%= submit_tag('suchen', :class => 'button') %>
+		<% end %>	
+
+		<br><br>
+		
+		<table class="tablebox">
+			<thead class="table-header">
+				<tr>
+					<th>#</th>
+					<th>Serial Number</th>
+					<th>Status</th>
+					<th>Message</th>
+				</tr>
+			</thead>		
+			<tbody>
+					<% if @skyrequest.present? %>
+					<% @skyrequest.cache.keys.each do |f| %>
+						<tr class="odd">
+						<td><%= @skyrequest.cache[f]["value"] %></td>
+						<td><%= @skyrequest.cache[f]["status"] %></td>
+						<td><%= @skyrequest.cache[f]["message"] %></td>
+						<td><%= @skyrequest.cache[f]["status"] %></td>
+						</tr>
+					<% end %>
+					<% end %>
+			</tbody>
+		</table>
+	</div>
+	</div>
+</div>

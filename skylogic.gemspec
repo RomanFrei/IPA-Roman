@@ -2,10 +2,10 @@
 require File.expand_path('../lib/skylogic/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["TODO: Write your name"]
-  gem.email         = ["TODO: Write your email address"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.authors       = ["Roman Frei"]
+  gem.email         = ["Roman.frei1@swisscom.com"]
+  gem.description   = %q{Skylogic Erweiterung für IVO::Core}
+  gem.summary       = %q{This Gem exchanges Data with the Skylogic Server}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
