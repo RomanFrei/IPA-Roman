@@ -1,9 +1,8 @@
-<div class="column half fl">
+<div class="column full">
 	<div class="box box-table">
 		<h2 class="box-header">
 			Skylogic Requests
 		</h2>
-
 	<div class="box-content">
 		<%= form_tag(skyrequests_path(), :method => :post) do %>
 			<%= label_tag("Serial Number") %>
@@ -12,27 +11,33 @@
 		<% end %>	
 
 		<br><br>
-		
+
+		<p style="color: red"><%= flash[:error] %></p><!-- show error messages -->
+
 		<table class="tablebox">
 			<thead class="table-header">
 				<tr>
-					<th>#</th>
 					<th>Serial Number</th>
 					<th>Status</th>
+					<th>Pin</th>
+					<th>Service Class</th>
+					<th>Locking</th>
 					<th>Message</th>
 				</tr>
 			</thead>		
-			<tbody>
-					<% if @skyrequest.present? %>
+			<tbody>	
+				<% if @skyrequest.present? %><!-- avoid nil value errors -->
 					<% @skyrequest.cache.keys.each do |f| %>
 						<tr class="odd">
-						<td><%= @skyrequest.cache[f]["value"] %></td>
-						<td><%= @skyrequest.cache[f]["status"] %></td>
-						<td><%= @skyrequest.cache[f]["message"] %></td>
-						<td><%= @skyrequest.cache[f]["status"] %></td>
+							<td><%= @skyrequest.cache[f]["value"] %></td>
+							<td><%= @skyrequest.cache[f]["status"] %></td>
+							<td><%= @skyrequest.cache[f]["pin"] %></td>
+							<td><%= @skyrequest.cache[f]["service_class"] %></td>
+							<td><%= @skyrequest.cache[f]["locking"] %></td>
+							<td><%= @skyrequest.cache[f]["message"].capitalize %></td><!-- catch different server responses -->
 						</tr>
 					<% end %>
-					<% end %>
+				<% end %>
 			</tbody>
 		</table>
 	</div>
