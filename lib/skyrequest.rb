@@ -27,7 +27,7 @@ module Skyrequest
 		def save(data) #write skylogic answer into cache
 			@cache[0] = data
 		end
-	
+
 		def seterrors #rename integer errors into strings
 			unless @cache.empty?
 				case @cache[0]["status"]
@@ -60,6 +60,7 @@ module Skyrequest
 					@cache[@keys] = @temp_cache[@keys-1]
 					@keys -= 1
 				end
+				@cache.delete(7) #don't let cache get bigger than 7
 			end
 		end
 	end

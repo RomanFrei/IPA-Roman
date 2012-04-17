@@ -5,36 +5,45 @@
 		</h2>
 	<div class="box-content">
 		<%= form_tag(skyrequests_path(), :method => :post) do %>
-			<%= label_tag("Serial Number") %>
+			<%= label_tag("MAC/SAI") %>
 			<%= text_field_tag(:value) %>
 			<%= submit_tag('suchen', :class => 'button') %>
 		<% end %>	
 
-		<br><br>
-
-		<p style="color: red"><%= flash[:error] %></p><!-- show error messages -->
+		<div id="clear"></div>
+		<p style="color: red"><%= flash[:error] %></p>
 
 		<table class="tablebox">
 			<thead class="table-header">
 				<tr>
-					<th>Serial Number</th>
+					<th>Value</th>
 					<th>Status</th>
-					<th>Pin</th>
 					<th>Service Class</th>
-					<th>Locking</th>
-					<th>Message</th>
+					<th>State</th>
+					<th>IP</th>
+					<th>FAP</th>
+					<th>rx_power</th>
+					<th>tx_power</th>
+					<th>upstream snr</th>
+					<th>downstream snr</th>
+					<th>SAI</th>
 				</tr>
 			</thead>		
 			<tbody>	
 				<% if @skyrequest.present? %><!-- avoid nil value errors -->
 					<% @skyrequest.cache.keys.each do |f| %>
 						<tr class="odd">
-							<td><%= @skyrequest.cache[f]["value"] %></td>
-							<td><%= @skyrequest.cache[f]["status"] %></td>
-							<td><%= @skyrequest.cache[f]["pin"] %></td>
-							<td><%= @skyrequest.cache[f]["service_class"] %></td>
-							<td><%= @skyrequest.cache[f]["locking"] %></td>
-							<td><%= @skyrequest.cache[f]["message"].capitalize %></td><!-- catch different server responses -->
+							<td><%= @skyrequest.cache[f]["value"].present? ? @skyrequest.cache[f]["value"] : "N/A" %></td>
+							<td><%= @skyrequest.cache[f]["status"].present? ? @skyrequest.cache[f]["status"] : "N/A" %></td>
+							<td><%= @skyrequest.cache[f]["service_class"].present? ? @skyrequest.cache[f]["service_class"] : "N/A" %></td>
+							<td><%= @skyrequest.cache[f]["state"].present? ? @skyrequest.cache[f]["state"] : "N/A" %></td>
+							<td><%= @skyrequest.cache[f]["ip"].present? ? @skyrequest.cache[f]["ip"] : "N/A"  %></td>
+							<td><%= @skyrequest.cache[f]["fap"].present? ? @skyrequest.cache[f]["fap"] : "N/A"  %></td>
+							<td><%= @skyrequest.cache[f]["rx_power"].present? ? @skyrequest.cache[f]["rx_power"] : "N/A"  %></td>
+							<td><%= @skyrequest.cache[f]["tx_power"].present? ? @skyrequest.cache[f]["tx_power"] : "N/A"  %></td>
+							<td><%= @skyrequest.cache[f]["upstream_snr"].present? ? @skyrequest.cache[f]["upstream_snr"] : "N/A"  %></td>
+							<td><%= @skyrequest.cache[f]["downstream_snr"].present? ? @skyrequest.cache[f]["downstream_snr"] : "N/A"  %></td>
+							<td><%= @skyrequest.cache[f]["sai"].present? ? @skyrequest.cache[f]["sai"] : "N/A" %></td>
 						</tr>
 					<% end %>
 				<% end %>
