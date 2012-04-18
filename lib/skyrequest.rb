@@ -19,11 +19,6 @@ module Skyrequest
 			return @cache
 		end
 		
-		def setindex #calculate index with modulo, range 0 to 5
-			@counter += 1
-			@index = @counter % 6
-		end
-
 		def save(data) #write skylogic answer into cache
 			@cache[0] = data
 		end

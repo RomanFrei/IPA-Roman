@@ -31,7 +31,6 @@ before_filter :get_string, :only => :create #avoid wrong inputs (strings)
 			@skyrequest.save_cache
 		end	
 		@skyrequest.changeids #re-index cache
-		@skyrequest.setindex #calculate index, range 0 to 5
 		@skylogic_data = @agent.call(@sky_method.to_s, @sky_attributes) #skylogic request with method and value
 		@skylogic_data["value"] = @value
 		@skyrequest.save(@skylogic_data) #save response into cache
