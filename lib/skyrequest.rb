@@ -7,9 +7,13 @@ module Skyrequest
 
 		def initialize() #Sky::Connector.new
 			@cache = {}
-			@index = 0
-			@counter = -1
 		end
+
+		def skylogger(request, user, time)
+   			@@skylogger ||= Logger.new("#{Rails.root}/log/skylogger.log")
+			@@skylogger.info "\nRequest: #{request["value"]}\nUsername: #{user}\nZeitpunkt: #{time}
+							  \nResponse: #{request}"
+  		end
 
 		def save_cache #save variables after new controller action
 			@@skycaches << self

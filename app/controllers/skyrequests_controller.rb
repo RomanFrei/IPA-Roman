@@ -12,10 +12,10 @@ before_filter :get_string, :only => :create #avoid wrong inputs (strings)
 	@value = params[:value]
 	@value.delete!(" ")
 	if @value.size == 12
-		@sky_attributes.merge!("mac" => @value.to_s.gsub(/\s+/, ""))
+		@sky_attributes.merge!("mac" => @value.to_s)
 		@sky_method = "tooway.terminal.getDetails"
 	elsif @value.size == 10
-		@sky_attributes.merge!("sai" => @value.to_s.gsub(/\s+/, ""))
+		@sky_attributes.merge!("sai" => @value.to_s)
 		@sky_method = "tooway.account.getDetails"
 	else
 		flash[:error] = "You have to commit a 12 character MAC or a 10 character SAI"
@@ -35,6 +35,7 @@ before_filter :get_string, :only => :create #avoid wrong inputs (strings)
 		@skylogic_data["value"] = @value
 		@skyrequest.save(@skylogic_data) #save response into cache
 		@skyrequest.seterrors #rename integer errors into strings
+		@skyrequest.skylogger(@skylogic_data, current_user.login, Time.now) #save server answer, username, and date in log file skylogic.log
 
 	redirect_to skyrequests_path
   end
